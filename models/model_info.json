@@ -1,0 +1,188 @@
+{
+  "dataset": "UCI Wine Quality (Red)",
+  "target": "quality",
+  "raw_features": [
+    "fixed acidity",
+    "volatile acidity",
+    "citric acid",
+    "residual sugar",
+    "chlorides",
+    "free sulfur dioxide",
+    "total sulfur dioxide",
+    "density",
+    "pH",
+    "sulphates",
+    "alcohol"
+  ],
+  "num_features": [
+    "fixed acidity",
+    "volatile acidity",
+    "citric acid",
+    "residual sugar",
+    "chlorides",
+    "free sulfur dioxide",
+    "total sulfur dioxide",
+    "density",
+    "pH",
+    "sulphates",
+    "alcohol",
+    "free_to_total_so2",
+    "sulphate_to_volatile"
+  ],
+  "cat_features": [
+    "alcohol_level",
+    "volatile_acidity_level",
+    "sulphates_level",
+    "ph_level"
+  ],
+  "metrics": {
+    "r2_test": 0.442,
+    "r2_cv_mean": 0.3803,
+    "r2_cv_std": 0.0566,
+    "rmse": 0.6039,
+    "mae": 0.4867,
+    "best_alpha": 686.65
+  },
+  "latex_equation": "\\widehat{\\text{Quality}} = 5.63 + 0.07 \\cdot \\text{alcohol} + 0.05 \\cdot \\text{sulphates} + 0.05 \\cdot \\text{alcohol\\_alcohol_level_high_alcohol} + 0.04 \\cdot \\text{alcohol\\_ph_level_balanced} + 0.04 \\cdot \\text{free_to_total_so2\\_sulphates_level_optimal_sulphates} + 0.04 \\cdot \\text{sulphate_to_volatile} - 0.03 \\cdot \\text{free\\_sulfur\\_dioxide\\_total\\_sulfur\\_dioxide} + 0.03 \\cdot \\text{alcohol_level_high_alcohol} + \\dots",
+  "top_features": [
+    {
+      "feature": "alcohol",
+      "weight": 0.0677,
+      "abs_weight": 0.0677
+    },
+    {
+      "feature": "sulphates",
+      "weight": 0.0501,
+      "abs_weight": 0.0501
+    },
+    {
+      "feature": "alcohol alcohol_level_high_alcohol",
+      "weight": 0.0493,
+      "abs_weight": 0.0493
+    },
+    {
+      "feature": "alcohol ph_level_balanced",
+      "weight": 0.0423,
+      "abs_weight": 0.0423
+    },
+    {
+      "feature": "free_to_total_so2 sulphates_level_optimal_sulphates",
+      "weight": 0.0375,
+      "abs_weight": 0.0375
+    },
+    {
+      "feature": "sulphate_to_volatile",
+      "weight": 0.0355,
+      "abs_weight": 0.0355
+    },
+    {
+      "feature": "free sulfur dioxide total sulfur dioxide",
+      "weight": -0.0297,
+      "abs_weight": 0.0297
+    },
+    {
+      "feature": "alcohol_level_high_alcohol",
+      "weight": 0.0293,
+      "abs_weight": 0.0293
+    },
+    {
+      "feature": "residual sugar chlorides",
+      "weight": 0.0292,
+      "abs_weight": 0.0292
+    },
+    {
+      "feature": "alcohol sulphates_level_high_sulphates",
+      "weight": 0.029,
+      "abs_weight": 0.029
+    },
+    {
+      "feature": "citric acid pH",
+      "weight": -0.0284,
+      "abs_weight": 0.0284
+    },
+    {
+      "feature": "sulphates volatile_acidity_level_clean",
+      "weight": 0.0281,
+      "abs_weight": 0.0281
+    },
+    {
+      "feature": "free sulfur dioxide sulphates",
+      "weight": -0.027,
+      "abs_weight": 0.027
+    },
+    {
+      "feature": "citric acid ph_level_crisp_acidic",
+      "weight": 0.0252,
+      "abs_weight": 0.0252
+    },
+    {
+      "feature": "pH alcohol_level_medium_alcohol",
+      "weight": -0.0251,
+      "abs_weight": 0.0251
+    },
+    {
+      "feature": "alcohol volatile_acidity_level_high_volatile_acid",
+      "weight": 0.0251,
+      "abs_weight": 0.0251
+    },
+    {
+      "feature": "total sulfur dioxide sulphates",
+      "weight": -0.0249,
+      "abs_weight": 0.0249
+    },
+    {
+      "feature": "density",
+      "weight": -0.0248,
+      "abs_weight": 0.0248
+    },
+    {
+      "feature": "alcohol alcohol_level_low_alcohol",
+      "weight": 0.0247,
+      "abs_weight": 0.0247
+    },
+    {
+      "feature": "sulphates alcohol_level_medium_alcohol",
+      "weight": 0.0246,
+      "abs_weight": 0.0246
+    }
+  ],
+  "medians": {
+    "fixed acidity": 7.9,
+    "volatile acidity": 0.52,
+    "citric acid": 0.26,
+    "residual sugar": 2.2,
+    "chlorides": 0.079,
+    "free sulfur dioxide": 14.0,
+    "total sulfur dioxide": 38.0,
+    "density": 0.99675,
+    "pH": 3.31,
+    "sulphates": 0.62,
+    "alcohol": 10.2
+  },
+  "mins": {
+    "fixed acidity": 4.6,
+    "volatile acidity": 0.12,
+    "citric acid": 0.0,
+    "residual sugar": 0.9,
+    "chlorides": 0.012,
+    "free sulfur dioxide": 1.0,
+    "total sulfur dioxide": 6.0,
+    "density": 0.99007,
+    "pH": 2.74,
+    "sulphates": 0.33,
+    "alcohol": 8.4
+  },
+  "maxs": {
+    "fixed acidity": 15.9,
+    "volatile acidity": 1.58,
+    "citric acid": 1.0,
+    "residual sugar": 15.5,
+    "chlorides": 0.611,
+    "free sulfur dioxide": 72.0,
+    "total sulfur dioxide": 289.0,
+    "density": 1.00369,
+    "pH": 4.01,
+    "sulphates": 2.0,
+    "alcohol": 14.9
+  }
+}

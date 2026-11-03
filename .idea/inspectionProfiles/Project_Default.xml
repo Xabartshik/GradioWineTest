@@ -1,0 +1,18 @@
+<component name="InspectionProjectProfileManager">
+  <profile version="1.0">
+    <option name="myName" value="Project Default" />
+    <inspection_tool class="PyUnresolvedReferencesInspection" enabled="true" level="WARNING" enabled_by_default="true">
+      <option name="ignoredIdentifiers">
+        <list>
+          <option value="tuple.pop" />
+          <option value="db" />
+          <option value="gif_interaction" />
+          <option value="item_db" />
+          <option value="main.check_access" />
+          <option value="main.langchain_huggingface" />
+          <option value="main.langchain_chroma" />
+        </list>
+      </option>
+    </inspection_tool>
+  </profile>
+</component>
