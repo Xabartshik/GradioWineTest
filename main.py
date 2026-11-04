@@ -6,9 +6,9 @@
     python app/app.py
 """
 
-import sys
-import os
 import logging
+import os
+import sys
 
 # Добавление корневой директории проекта в путь поиска модулей
 BASE_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -19,17 +19,11 @@ from app.app import app
 
 # Настройка консольного логирования
 logging.basicConfig(
-    level=logging.INFO,
-    format='%(asctime)s - [%(levelname)s] - %(message)s'
+    level=logging.INFO, format="%(asctime)s - [%(levelname)s] - %(message)s"
 )
 logger = logging.getLogger(__name__)
 
 if __name__ == "__main__":
     logger.info("Инициализация и запуск веб-сервиса Gradio по оценке винчика...")
     # Запуск веб-сервера на локальном хосте 127.0.0.1:7860
-    app.launch(
-        server_name="127.0.0.1",
-        server_port=1477,
-        share=False,
-        inbrowser=True
-    )
+    app.launch(server_name="127.0.0.1", server_port=1477, share=False, inbrowser=True)
