@@ -57,7 +57,8 @@
    * Отображение на форме точного уравнения регрессии в синтаксисе LaTeX с округлением коэффициентов до двух знаков.
 
 5. Заранее обученная и сохраненная модель:
-   * Сериализованный конвейер сохранен в models/wine_model.joblib.
+   * Сериализованный конвейер сохранен в models/wine_model_sklearn_{sklearn_version}_pickle_{pickle_version}.joblib (в имени файла указаны версии scikit-learn и протокола pickle).
+   * Имя файла модели и версии библиотек также зафиксированы в models/model_info.json.
    * Модель загружается в память один раз при старте веб-сервера.
 
 ---
@@ -72,7 +73,7 @@ Gradio/
 │   ├── model.py              # Загрузка конвейера из .joblib и расчет предсказаний
 │   └── plot.py               # Построение диаграмм рассеяния (scatter) и линий регрессии
 ├── models/
-│   ├── wine_model.joblib     # Обученный конвейер Scikit-Learn
+│   ├── wine_model_sklearn_1.9.1_pickle_5.joblib # Обученный конвейер Scikit-Learn
 │   └── model_info.json       # Метаданные (метрики R², RMSE, MAE, уравнение LaTeX, веса)
 ├── data/
 │   ├── winequality-red.csv   # Исходный набор данных (UCI Wine Quality)
@@ -141,10 +142,10 @@ http://127.0.0.1:1477 (или http://127.0.0.1:7860 при запуске app.py
 ```python
 import joblib
 import pandas as pd
-from app.model import prepare_input_dataframe
+from app.model import prepare_input_dataframe, MODEL_PATH
 
 # Загрузка конвейера из файла
-model = joblib.load("models/wine_model.joblib")
+model = joblib.load(MODEL_PATH)
 
 # Пример входных характеристик вина (одна строка)
 raw_input = {

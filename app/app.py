@@ -3,12 +3,12 @@
 на основе физико-химических показателей (UCI Wine Quality Dataset) с расширенной предобработкой.
 """
 
+import logging
 import os
 import sys
-import logging
-from typing import Tuple, Dict, Any
+
 import gradio as gr
-import matplotlib.pyplot as plt
+from matplotlib.figure import Figure
 
 # Добавление корневой директории проекта в sys.path
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
@@ -17,7 +17,7 @@ if PROJECT_ROOT not in sys.path:
     sys.path.insert(0, PROJECT_ROOT)
 
 from app.model import model_service
-from app.plot import create_scatter_plot, create_multi_feature_plots, FEATURE_LABELS
+from app.plot import create_multi_feature_plots, create_scatter_plot
 
 # Настройка логирования
 logging.basicConfig(
@@ -64,7 +64,7 @@ def predict_wine_quality(
     sulphates: float,
     alcohol: float,
     scatter_feature: str
-) -> Tuple[str, Dict[str, float], plt.Figure, plt.Figure, str]:
+) -> tuple[str, dict[str, float], Figure, Figure, str]:
     """
     Основной обработчик запросов Gradio.
     Принимает 11 параметров вина, выполняет расчет оценки качества и строит графики.

@@ -17,6 +17,8 @@ if BASE_DIR not in sys.path:
 
 from app.app import app
 
+# TODO:
+
 # Настройка консольного логирования
 logging.basicConfig(
     level=logging.INFO, format="%(asctime)s - [%(levelname)s] - %(message)s"

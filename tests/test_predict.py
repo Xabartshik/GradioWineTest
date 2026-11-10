@@ -11,6 +11,7 @@ import matplotlib
 # Устанавливаем backend 'Agg' во избежание проблем с Tkinter в тестах
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
+from matplotlib.figure import Figure
 
 from app.model import WineQualityModel
 from app.plot import create_scatter_plot, create_multi_feature_plots
@@ -128,7 +129,7 @@ def test_scatter_plot_generation(model_service):
         feature_name='alcohol'
     )
 
-    assert isinstance(fig, plt.Figure), "Функция должна возвращать объект matplotlib.figure.Figure"
+    assert isinstance(fig, Figure), "Функция должна возвращать объект matplotlib.figure.Figure"
     plt.close(fig)
 
 
@@ -159,5 +160,5 @@ def test_multi_feature_plot_generation(model_service):
         pred_quality=pred_score
     )
 
-    assert isinstance(fig, plt.Figure), "Функция должна возвращать объект matplotlib.figure.Figure"
+    assert isinstance(fig, Figure), "Функция должна возвращать объект matplotlib.figure.Figure"
     plt.close(fig)

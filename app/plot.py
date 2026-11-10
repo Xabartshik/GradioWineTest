@@ -5,7 +5,7 @@
 """
 
 import logging
-from typing import Dict, Any, Optional
+from typing import Any
 import numpy as np
 import pandas as pd
 import matplotlib
@@ -14,6 +14,7 @@ import matplotlib
 matplotlib.use('Agg')
 import matplotlib.pyplot as plt
 import matplotlib.axes
+from matplotlib.figure import Figure
 
 # Настройка логгера модуля
 logger = logging.getLogger(__name__)
@@ -70,12 +71,12 @@ def prepare_batch(df_raw: pd.DataFrame) -> pd.DataFrame:
 
 
 def create_scatter_plot(
-    train_df: pd.DataFrame,
+    train_df: pd.DataFrame | None,
     model: Any,
-    current_input: Dict[str, Any],
+    current_input: dict[str, Any],
     pred_quality: float,
     feature_name: str = 'alcohol'
-) -> plt.Figure:
+) -> Figure:
     """
     Построение основной диаграммы рассеяния (scatter plot) с линией регрессии
     и выделенной точкой текущего исследуемого вина.
@@ -188,11 +189,11 @@ def create_scatter_plot(
 
 
 def create_multi_feature_plots(
-    train_df: pd.DataFrame,
+    train_df: pd.DataFrame | None,
     model: Any,
-    current_input: Dict[str, Any],
+    current_input: dict[str, Any],
     pred_quality: float
-) -> plt.Figure:
+) -> Figure:
     """
     Бонусная функция: построение сетки диаграмм рассеяния с линиями регрессии
     для 4 наиболее значимых физико-химических показателей вина.
@@ -203,6 +204,9 @@ def create_multi_feature_plots(
     plt.style.use('seaborn-v0_8-whitegrid' if 'seaborn-v0_8-whitegrid' in plt.style.available else 'default')
     fig, axes = plt.subplots(2, 2, figsize=(12, 8), dpi=100)
     axes_flat = axes.flatten()
+
+    if train_df is None or train_df.empty:
+        return fig
 
     np.random.seed(42)
     jitter_y = np.random.uniform(-0.18, 0.18, size=len(train_df))

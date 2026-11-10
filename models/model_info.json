@@ -1,6 +1,9 @@
 {
   "dataset": "UCI Wine Quality (Red)",
   "target": "quality",
+  "model_filename": "wine_model_sklearn_1.9.1_pickle_5.joblib",
+  "sklearn_version": "1.9.1",
+  "pickle_protocol": 5,
   "raw_features": [
     "fixed acidity",
     "volatile acidity",

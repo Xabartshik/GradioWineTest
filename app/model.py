@@ -7,7 +7,7 @@
 import os
 import json
 import logging
-from typing import Dict, Any, Tuple
+from typing import Any
 import numpy as np
 import pandas as pd
 import joblib
@@ -18,12 +18,43 @@ logger = logging.getLogger(__name__)
 # Пути к файлам модели и сопутствующих артефактов
 CURRENT_DIR = os.path.dirname(os.path.abspath(__file__))
 PROJECT_ROOT = os.path.dirname(CURRENT_DIR)
-MODEL_PATH = os.path.join(PROJECT_ROOT, "models", "wine_model.joblib")
-METADATA_PATH = os.path.join(PROJECT_ROOT, "models", "model_info.json")
+MODELS_DIR = os.path.join(PROJECT_ROOT, "models")
+METADATA_PATH = os.path.join(MODELS_DIR, "model_info.json")
 TRAIN_DATA_PATH = os.path.join(PROJECT_ROOT, "data", "train_data.csv")
 
 
-def prepare_input_dataframe(raw_features: Dict[str, Any]) -> pd.DataFrame:
+def resolve_model_path(models_dir: str = MODELS_DIR, metadata_path: str = METADATA_PATH) -> str:
+    """
+    Определение пути к файлу обученной модели:
+    по имени из метаданных, либо по маске в директории моделей, либо по базовому имени.
+    """
+    if os.path.exists(metadata_path):
+        try:
+            with open(metadata_path, "r", encoding="utf-8") as f:
+                meta = json.load(f)
+            model_filename = meta.get("model_filename")
+            if model_filename:
+                candidate = os.path.join(models_dir, model_filename)
+                if os.path.exists(candidate):
+                    return candidate
+        except Exception:
+            pass
+
+    # Поиск файлов моделей в директории models
+    if os.path.exists(models_dir):
+        joblib_files = [f for f in os.listdir(models_dir) if f.endswith(".joblib")]
+        if joblib_files:
+            # Сортировка по времени изменения (самый свежий файл первым)
+            joblib_files.sort(key=lambda x: os.path.getmtime(os.path.join(models_dir, x)), reverse=True)
+            return os.path.join(models_dir, joblib_files[0])
+
+    return os.path.join(models_dir, "wine_model.joblib")
+
+
+MODEL_PATH = resolve_model_path()
+
+
+def prepare_input_dataframe(raw_features: dict[str, Any]) -> pd.DataFrame:
     """
     Преобразование словаря из 11 исходных признаков вина в расширенный DataFrame
     с добавлением инженерных соотношений и категорий для One-Hot кодирования.
@@ -104,7 +135,7 @@ class WineQualityModel:
         else:
             logger.warning("Файл обучающих данных %s не найден.", TRAIN_DATA_PATH)
 
-    def predict(self, input_features: Dict[str, Any]) -> Tuple[float, str, Dict[str, float]]:
+    def predict(self, input_features: dict[str, Any]) -> tuple[float, str, dict[str, float]]:
         """
         Выполнение предсказания оценки качества вина на основе переданных характеристик.
 
@@ -120,6 +151,9 @@ class WineQualityModel:
         df_prepared = prepare_input_dataframe(input_features)
 
         # Вычисление непрерывного предсказания качества с помощью пайплайна
+        if self.model is None:
+            raise RuntimeError("Модель не инициализирована")
+
         raw_prediction = float(self.model.predict(df_prepared)[0])
         pred_score = round(max(0.0, min(10.0, raw_prediction)), 2)
 
