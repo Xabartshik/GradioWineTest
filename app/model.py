@@ -4,13 +4,14 @@
 оценки качества с использованием предварительно обученного конвейера Scikit-Learn.
 """
 
-import os
 import json
 import logging
+import os
 from typing import Any
+
+import joblib
 import numpy as np
 import pandas as pd
-import joblib
 
 # Настройка логгера модуля
 logger = logging.getLogger(__name__)
@@ -37,8 +38,8 @@ def resolve_model_path(models_dir: str = MODELS_DIR, metadata_path: str = METADA
                 candidate = os.path.join(models_dir, model_filename)
                 if os.path.exists(candidate):
                     return candidate
-        except Exception:
-            pass
+        except (OSError, json.JSONDecodeError) as e:
+            logger.warning("Ошибка чтения метаданных модели: %s", e)
 
     # Поиск файлов моделей в директории models
     if os.path.exists(models_dir):

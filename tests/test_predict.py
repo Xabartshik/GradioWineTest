@@ -3,10 +3,8 @@
 Запуск через: pytest tests/test_predict.py
 """
 
-import os
-import pytest
-import pandas as pd
 import matplotlib
+import pytest
 
 # Устанавливаем backend 'Agg' во избежание проблем с Tkinter в тестах
 matplotlib.use('Agg')
@@ -14,7 +12,7 @@ import matplotlib.pyplot as plt
 from matplotlib.figure import Figure
 
 from app.model import WineQualityModel
-from app.plot import create_scatter_plot, create_multi_feature_plots
+from app.plot import create_multi_feature_plots, create_scatter_plot
 
 
 @pytest.fixture(scope="module")
@@ -66,7 +64,7 @@ def test_predict_premium_wine(model_service):
         'alcohol': 12.8
     }
 
-    pred_score, category_text, breakdown = model_service.predict(premium_wine)
+    pred_score, category_text, _breakdown = model_service.predict(premium_wine)
 
     assert isinstance(pred_score, float), "Оценка качества должна быть числом float"
     assert pred_score >= 6.5, f"Оценка премиального вина должна быть >= 6.5, получено: {pred_score}"
@@ -95,7 +93,7 @@ def test_predict_low_quality_wine(model_service):
         'alcohol': 8.8
     }
 
-    pred_score, category_text, breakdown = model_service.predict(faulty_wine)
+    pred_score, category_text, _breakdown = model_service.predict(faulty_wine)
 
     assert pred_score < 5.0, f"Оценка дефектного вина должна быть < 5.0, получено: {pred_score}"
     assert "Низкое качество" in category_text or "Стандартное" in category_text
