@@ -118,18 +118,14 @@ def create_scatter_plot(
     jitter_y = np.random.uniform(-0.18, 0.18, size=len(train_df))
     y_scatter = train_df["quality"] + jitter_y
 
-    scatter = ax.scatter(
+    ax.scatter(
         train_df[feature_name],
         y_scatter,
-        c=train_df["quality"],
-        cmap="Spectral",
-        alpha=0.65,
-        s=40,
+        alpha=0.35,
+        s=30,
         edgecolor="none",
-        label="Образцы вин обучающей выборки",
+        label="Образцы вина обучающей выборки",
     )
-    cbar = fig.colorbar(scatter, ax=ax, pad=0.02)
-    cbar.set_label("Фактическое качество (баллы)", fontsize=9, fontweight="bold")
 
     # 2. Отрисовка линии регрессии
     feat_min = float(train_df[feature_name].min())
@@ -241,10 +237,9 @@ def create_multi_feature_plots(
         ax.scatter(
             train_df[feat],
             train_df["quality"] + jitter_y,
-            c=train_df["quality"],
-            cmap="Spectral",
-            alpha=0.5,
-            s=22,
+            color="#7f8c8d",
+            alpha=0.35,
+            s=18,
         )
 
         f_min, f_max = float(train_df[feat].min()), float(train_df[feat].max())
