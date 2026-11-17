@@ -121,7 +121,6 @@ def create_scatter_plot(
     ax.scatter(
         train_df[feature_name],
         y_scatter,
-        alpha=0.35,
         s=30,
         edgecolor="none",
         label="Образцы вина обучающей выборки",
@@ -237,8 +236,6 @@ def create_multi_feature_plots(
         ax.scatter(
             train_df[feat],
             train_df["quality"] + jitter_y,
-            color="#7f8c8d",
-            alpha=0.35,
             s=18,
         )
 
